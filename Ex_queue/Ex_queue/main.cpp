@@ -5,18 +5,19 @@ using namespace std;
 int main()
 {
 	Queue<int> Q(10);
+	Queue<char> P(100);
 
-	Q.enqueue(3);
+	P.enqueue('c');
 	Q.print();
-	Q.enqueue(6);
+	Q.enqueue('c');
 	Q.print();
-	Q.enqueue(7);
-	Q.print();
-	Q.dequeue();
+	Q.enqueue('c');
 	Q.print();
 	Q.dequeue();
 	Q.print();
-	Q.enqueue(1);
+	Q.dequeue();
+	Q.print();
+	Q.enqueue('c');
 	Q.print();
 	Q.dequeue();
 	Q.print();
