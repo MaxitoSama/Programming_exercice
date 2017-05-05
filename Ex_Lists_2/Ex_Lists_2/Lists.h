@@ -66,6 +66,11 @@ void List<T>::pushFront(const T& elem)
 	aux->prev = nullptr;
 	first = aux;
 
+	if (first->next)
+	{
+		first->next->prev = first;
+	}
+
 	if (numElems == 0) { last = aux; }
 	numElems++;
 }
@@ -159,6 +164,8 @@ void List<T>::insert(unsigned int pos, const T& elem)
 		aux->prev = prev;
 		aux->next = curr;
 		curr->prev = aux;
+		delete curr;
+		delete prev;
 
 		numElems++;
 	}
@@ -193,6 +200,7 @@ void List<T>::remove(unsigned int pos)
 		prev->next = curr->next;
 		curr->next->prev = prev;
 		delete curr;
+		delete prev;
 
 		numElems--;
 	}
