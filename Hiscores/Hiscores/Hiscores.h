@@ -148,38 +148,52 @@ void Hiscores<T>::moveNode(node *n)
 {
 	// Move towards the top while the score is higher
 	// TODO 
-	if ( n->above!=nullptr && n->score > n->above->score )
-	{
-		node *aux = n->above->above;
-		node *aux2 = n->above;
-		node *aux3 = n->below;
-
-		n->above = aux;
-		n->below = aux2;
-		if (aux != nullptr)
+	while ( n->above!=nullptr && n->score > n->above->score )
+	{		
 		{
-			aux->below = n;
-		}
-		else
-		{
-			first = n;
-		}
-		aux2->above = n;
-		aux2->below = aux3;
-		if (aux3 != nullptr)
-		{
-			aux3->above = aux2;
-		}
+			node *aux = n->above->above;
+			node *aux2 = n->above;
+			node *aux3 = n->below;
 
-
+			n->above = aux;
+			n->below = aux2;
+			if (aux != nullptr)
+			{
+				aux->below = n;
+			}
+			else
+			{
+				first = n;
+			}
+			aux2->above = n;
+			aux2->below = aux3;
+			if (aux3 != nullptr)
+			{
+				aux3->above = aux2;
+			}
+		}
+		
 	}
 
+	while (n->below != nullptr && n->score < n->below->score)
+	{
+		node *aux = n->below->below;
+		node *aux2 = n->below;
+		node *aux3 = n->above;
 
-	// Move towards the bottom while the score is lower
-	// TODO
-
-	// Check if it is the new first element
-	// TODO
+		n->below = aux;
+		n->above = aux2;
+		if (aux != nullptr)
+		{
+			aux->above = n;
+		}
+		aux2->below = n;
+		aux2->above = aux3;
+		if (aux3 != nullptr)
+		{
+			aux3->below = aux2;
+		}
+	}
 }
 
 #endif // HISCORES_H
